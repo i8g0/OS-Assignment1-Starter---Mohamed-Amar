@@ -83,7 +83,7 @@ class Process implements Runnable {
         System.out.println(Colors.YELLOW + "  ⏸ " + Colors.CYAN + name + Colors.RESET + 
                           " completed quantum " + Colors.BRIGHT_YELLOW + runTime + "ms" + Colors.RESET + 
                           " │ Overall progress: " + overallProgressBar);
-        System.out.println(Colors.MAGENTA + "     Remaining time: " + remainingTime + "ms" + Colors.RESET);
+        System.out.println(Colors.MAGENTA + "    Remaining time: " + remainingTime + "ms" + Colors.RESET);
         
         // If the process still has remaining time, it yields CPU for the next process
         if (remainingTime > 0) {
@@ -150,6 +150,11 @@ class Process implements Runnable {
 }
 
 public class SchedulerSimulation {
+    
+    // ===== START OF FEATURE 2 ADDITION (Step 1) =====
+    public static int contextSwitches = 0;
+    // ===== END OF FEATURE 2 ADDITION =====
+
     public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
@@ -245,6 +250,10 @@ public class SchedulerSimulation {
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
             
+            // ===== START OF FEATURE 2 ADDITION (Step 2) =====
+            contextSwitches++; 
+            // ===== END OF FEATURE 2 ADDITION =====
+
             // Start the thread, which will run the process for one time quantum
             currentThread.start();
             
@@ -280,11 +289,15 @@ public class SchedulerSimulation {
                           Colors.RESET);
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + "║" + Colors.RESET + 
                           Colors.BG_GREEN + Colors.WHITE + Colors.BOLD + 
-                          "                     ✓  ALL PROCESSES COMPLETED  ✓                            " + 
+                          "                     ✓  ALL PROCESSES COMPLETED  ✓                             " + 
                           Colors.RESET + Colors.BOLD + Colors.BRIGHT_GREEN + "║" + Colors.RESET);
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╚════════════════════════════════════════════════════════════════════════════════╝" + 
                           Colors.RESET + "\n");
+
+        // ===== START OF FEATURE 2 ADDITION (Step 3) =====
+        System.out.println(Colors.YELLOW + "Total context switches: " + Colors.BRIGHT_YELLOW + contextSwitches + Colors.RESET + "\n");
+        // ===== END OF FEATURE 2 ADDITION =====
     }
     
     // Method to add a process to the queue and map, while printing a "ready" message
