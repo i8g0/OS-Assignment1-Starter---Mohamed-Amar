@@ -1,58 +1,13 @@
-# Reflection Questions
+# Reflection
 
-## Instructions
-Answer the following questions about your learning experience. Each answer should be **at least 5-7 sentences** and show your understanding.
+## 1. What did you learn about multithreading from this assignment?
+Through this assignment, I gained a deep practical understanding of how multithreading works in Java. I learned how to create and manage threads using the `Runnable` interface by mapping each process to a distinct thread. I also saw firsthand how the CPU scheduler dictates which thread gets to execute using a Round-Robin algorithm. Observing the simulation helped me understand the thread lifecycle, especially how threads transition between runnable and running states. Furthermore, I learned the importance of using methods like `Thread.sleep()` to simulate execution time and `Thread.join()` to ensure the main thread waits for a process to finish its quantum. This hands-on approach made the theoretical concepts of OS scheduling much more concrete.
 
----
+## 2. What was the most challenging part of this assignment and why?
+The most challenging part of this assignment was implementing the waiting time tracking feature. Unlike simple counters, calculating the exact waiting time required tracking multiple timestamps for each individual process. It was difficult to figure out exactly when a process started waiting and when it resumed execution, especially since processes were constantly being enqueued and dequeued. I had to ensure that the time spent executing during a time quantum was not mistakenly counted as waiting time. Additionally, keeping the final output formatted correctly in a summary table while dealing with concurrent threads added another layer of complexity to the task.
 
-## Question 1: What did you learn about multithreading?
+## 3. How did you overcome the challenges you faced?
+To overcome the challenges with tracking waiting time, I decided to break down the problem into smaller, logical steps. I added specific variables in the `Process` class, namely `creationTime`, `lastRunTime`, and `totalWaitingTime`, to encapsulate the tracking logic within the object itself. Instead of calculating everything at the end, I updated the accumulated waiting time right before a process started its quantum. After the quantum finished, I immediately updated the `lastRunTime` to the current system time. Finally, creating an `ArrayList` to store references to all processes allowed me to easily iterate through them at the end of the simulation to print the final summary table correctly.
 
-**Your Answer:**
-
-[Write your answer here. Discuss specific concepts like thread creation, thread states, how threads execute concurrently, what surprised you, etc.]
-
----
-
-## Question 2: What was the most challenging part of this assignment?
-
-**Your Answer:**
-
-[Describe the specific challenge. Was it understanding the code? Implementing a feature? Using Git? Explain what made it difficult and how it relates to the course concepts.]
-
----
-
-## Question 3: How did you overcome the challenges you faced?
-
-**Your Answer:**
-
-[Describe your problem-solving approach. Did you read documentation? Ask for help? Debug systematically? What resources did you use? What strategies worked?]
-
----
-
-## Question 4: How can you apply multithreading concepts in real-world applications?
-
-**Your Answer:**
-
-[Give specific examples from real applications you use (web browsers, games, mobile apps, etc.). Explain why threads are useful in those scenarios. Connect to what you learned in this assignment.]
-
----
-
-## Additional Reflections (Optional)
-
-### What would you like to learn more about?
-
-[Any topics related to threading, concurrency, or operating systems that you're curious about?]
-
----
-
-### How confident do you feel about multithreading concepts now?
-
-[Rate yourself and explain: Beginner / Intermediate / Confident]
-
-[Explain your rating - what do you understand well? What needs more practice?]
-
----
-
-### Feedback on the assignment
-
-[Any comments about the assignment? Was it helpful? Too easy/hard? Suggestions for improvement?]
+## 4. How can multithreading concepts be applied in real-world applications?
+Multithreading is essential for building responsive and efficient real-world applications. For instance, in modern web browsers, one thread can handle user interface interactions while other threads download files or render complex graphics in the background. In video games, multithreading allows the game engine to process AI logic, physics calculations, and audio rendering simultaneously without freezing the gameplay. Furthermore, web servers rely heavily on multithreading to handle thousands of concurrent client requests efficiently, assigning a separate thread to each incoming connection. Ultimately, multithreading maximizes CPU utilization and provides a much smoother user experience in almost all complex software systems.
